@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorOnline">#00A2FC</color>
+    <color name="no_internet">#000</color>
+    <color name="color_no_internet">#000</color>
+    <color name="color_max_text_wall">#116DCF</color>
+    <color name="black_color">#000</color>
+</resources>
