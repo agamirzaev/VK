@@ -37,7 +37,9 @@ public class AdapterDocs extends RecyclerView.Adapter<AdapterDocs.ViewHolderDocs
     public void onBindViewHolder(@NonNull AdapterDocs.ViewHolderDocs viewHolderDocs, int i) {
         ItemDocs item = itemDocs.get(i);
         viewHolderDocs.name_docs.setText(item.getTitle());
-        Picasso.with(viewHolderDocs.itemView.getContext()).load(item.getUrl()).into(viewHolderDocs.image_docs);
+        Picasso.get()
+                .load(item.getUrl())
+                .into(viewHolderDocs.image_docs);
     }
 
     @Override

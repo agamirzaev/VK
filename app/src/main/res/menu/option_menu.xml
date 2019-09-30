@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add_bookmark"
+        android:title="@string/add_bookmark" />
+    <item
+        android:id="@+id/pin_bookmark"
+        android:title="@string/pin_bookmark" />
+    <item
+        android:id="@+id/copy_wall"
+        android:title="@string/copy_wall" />
+    <item
+        android:id="@+id/delete_wall"
+        android:title="@string/delete_wall" />
+
+
+</menu>

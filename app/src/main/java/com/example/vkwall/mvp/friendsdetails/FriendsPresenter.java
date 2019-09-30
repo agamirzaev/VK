@@ -6,7 +6,7 @@ import com.example.vkwall.data.model.FriendsInfo.FieldsFriendsInfo;
 import com.example.vkwall.data.model.FriendsList.FieldsFriends;
 import com.example.vkwall.data.model.Profile.AddFriends.FieldsAddFriends;
 import com.example.vkwall.data.model.Profile.DeleteFriends.FieldsDelete;
-import com.example.vkwall.data.model.ProfileWall.FieldsWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.FieldsWall;
 import com.example.vkwall.mvp.base.BasePresenter;
 
 import retrofit2.Call;
@@ -137,8 +137,10 @@ public class FriendsPresenter extends BasePresenter<FriendsView.ViewFriends> imp
 
                 @Override
                 public void onFailure(Call<FieldsFriends> call, Throwable t) {
-                    getView().hideProgress();
-                    getView().noInternet();
+                    if (getView() != null) {
+                        getView().hideProgress();
+                        getView().noInternet();
+                    }
                 }
             });
         }

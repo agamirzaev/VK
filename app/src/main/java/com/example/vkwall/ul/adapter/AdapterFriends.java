@@ -11,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vkwall.R;
-import com.example.vkwall.data.model.FriendsInfo.FriendsInfo;
 import com.example.vkwall.data.model.FriendsList.ItemFriends;
-import com.example.vkwall.ul.main.FriendsInfoActivity;
+import com.example.vkwall.ul.main.activity.FriendsInfoActivity;
 import com.example.vkwall.util.SharedPreference;
 import com.squareup.picasso.Picasso;
 
@@ -78,7 +77,7 @@ public class AdapterFriends extends RecyclerView.Adapter<AdapterFriends.FriendsV
     private void setData(FriendsViewHolder friendsViewHolder, ItemFriends friends) {
         friendsViewHolder.last_name.setText(friends.getLastName());
         friendsViewHolder.first_name.setText(friends.getFirstName());
-        Picasso.with(friendsViewHolder.itemView.getContext())
+        Picasso.get()
                 .load(friends.getPhotoMaxOrig())
                 .into(friendsViewHolder.photo_avatar);
         if (friends.getOnline() == 1) {

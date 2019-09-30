@@ -7,7 +7,7 @@ import com.example.vkwall.mvp.base.MvpPresenter
 import com.example.vkwall.mvp.base.MvpView
 
 interface FaveContract : MvpView {
-    fun showFaveProfile(itemFave: List<ItemFave>, profileFaves: List<ProfileFave>, groupFaves: List<GroupFave>)
+    fun showFaveProfile(itemFave: ArrayList<ItemFave>, profileFaves: ArrayList<ProfileFave>, groupFaves: ArrayList<GroupFave>)
 
     fun showProgressFave()
 

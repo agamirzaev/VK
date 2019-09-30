@@ -35,7 +35,7 @@ public class AdapterPhotos extends RecyclerView.Adapter<AdapterPhotos.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull AdapterPhotos.ViewHolderPhotos viewHolderPhotos, int i) {
         ItemPhotos itemPhoto = itemPhotos.get(i);
-        Picasso.with(viewHolderPhotos.itemView.getContext())
+        Picasso.get()
                 .load(itemPhoto.getSizes().get(3).getUrl())
                 .into(viewHolderPhotos.list_photos);
     }

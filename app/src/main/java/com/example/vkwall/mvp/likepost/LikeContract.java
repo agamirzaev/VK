@@ -14,8 +14,8 @@ public interface LikeContract {
     }
 
     interface PresenterLikePost extends MvpPresenter<LikeContract.ViewLikePost> {
-        void likePostWall(String type, String owner_id, String item_id, String access_token, String v);
+        void likePostWall(String type, int owner_id, int item_id, String access_token, String v);
 
-        void deleteLike(String type, String owner_id, String item_id, String access_token, String v);
+        void deleteLike(String type, int owner_id, int item_id, String access_token, String v);
     }
 }

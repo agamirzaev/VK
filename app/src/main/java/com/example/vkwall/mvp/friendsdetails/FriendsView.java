@@ -5,9 +5,9 @@ import com.example.vkwall.data.model.FriendsInfo.FriendsInfo;
 import com.example.vkwall.data.model.FriendsList.ResponseFriends;
 import com.example.vkwall.data.model.Profile.AddFriends.FieldsAddFriends;
 import com.example.vkwall.data.model.Profile.DeleteFriends.ResponseDelete;
-import com.example.vkwall.data.model.ProfileWall.GroupWall;
-import com.example.vkwall.data.model.ProfileWall.ItemWall;
-import com.example.vkwall.data.model.ProfileWall.ProfileWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.GroupWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.ItemWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.ProfileWall;
 import com.example.vkwall.mvp.base.MvpPresenter;
 import com.example.vkwall.mvp.base.MvpView;
 

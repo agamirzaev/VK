@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vk</string>
+    <string name="app_name">VK</string>
     <integer name="com_vk_sdk_AppId">7096958</integer>
     <string name="title_activity_button">ButtonActivity</string>
     <string name="title_friends">Друзья</string>
@@ -26,4 +26,39 @@
     <string name="friends">Друзья</string>
     <string name="delete_friends">Удалить из друзей</string>
     <string name="add_friends">Добавить в друзья</string>
+    <string name="no_status">Нет статуса...</string>
+    <string name="status_text">Ваш статус...</string>
+    <string name="no_fave">Здесь пока нет ни одной закладки</string>
+    <string name="status">Статус</string>
+    <string name="data">Дата рождения</string>
+    <string name="home_town">Город</string>
+    <string name="marital_status">Семейное положение</string>
+    <string name="language">Языки</string>
+    <string name="сontact_information">Контактная информация</string>
+    <string name="life_position">Жизненная позиция</string>
+    <string name="outlooks">Мировоззрения</string>
+    <string name="main_thing_life">Главное в жизни</string>
+    <string name="main_thing_people">Главное в людях</string>
+    <string name="smoking">Отношение к курению</string>
+    <string name="alcohol">Отношение к алкоголю</string>
+    <string name="personal_info">Личная информация</string>
+    <string name="activity">Деятельность</string>
+    <string name="interesting">Интересы</string>
+    <string name="life_music">Любимая музыка</string>
+    <string name="life_films">Любимые фильмы</string>
+    <string name="life_books">Любимые книги</string>
+    <string name="life_game">Любимые игры</string>
+    <string name="life_quote">Любимые цитаты</string>
+    <string name="about">О себе</string>
+    <string name="edit_profile">Редактировать</string>
+    <string name="save_profile">Сохранить</string>
+    <string name="add_bookmark">Сохранить в закладки</string>
+    <string name="recommended">Рекомендации</string>
+    <string name="photoS">PHOTO</string>
+    <string name="newsfeed">Новости</string>
+    <string name="save">Save</string>
+    <string name="wall_option">⋮</string>
+    <string name="delete_wall">Удалить запись</string>
+    <string name="pin_bookmark">Закрепить</string>
+    <string name="copy_wall">Скопировать ссылку</string>
 </resources>

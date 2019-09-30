@@ -2,7 +2,7 @@ package com.example.vkwall.mvp.usersinfo;
 
 import com.example.vkwall.data.DataManager;
 import com.example.vkwall.data.model.FollowersList.FieldsFollowers;
-import com.example.vkwall.data.model.ProfileWall.FieldsWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.FieldsWall;
 import com.example.vkwall.mvp.base.BasePresenter;
 
 

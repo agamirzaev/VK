@@ -1,6 +1,8 @@
 package com.example.vkwall.data.remote
 
+import com.example.vkwall.data.model.AddFave.FieldsAdd
 import com.example.vkwall.data.model.DeleteFave.ResponseDeleteFave
+import com.example.vkwall.data.model.DeleteWall.FieldsDeleteWall
 import com.example.vkwall.data.model.FollowersList.FieldsFollowers
 import com.example.vkwall.data.model.FriendsList.FieldsFriends
 import com.example.vkwall.data.model.FriendsInfo.FieldsFriendsInfo
@@ -14,18 +16,94 @@ import com.example.vkwall.data.model.Profile.FaveProfile.FieldsFave
 import com.example.vkwall.data.model.Profile.GroupProfile.FieldsGroup
 import com.example.vkwall.data.model.Profile.PhotosProfile.FieldsPhotos
 import com.example.vkwall.data.model.Profile.ProfileInfo.FieldsProfile
+import com.example.vkwall.data.model.Profile.ProfileStatus.FieldsGetStatus
+import com.example.vkwall.data.model.Profile.ProfileStatus.FieldsSetStatus
 import com.example.vkwall.data.model.Profile.VideoProfile.FieldsVideo
-import com.example.vkwall.data.model.ProfileWall.FieldsWall
+import com.example.vkwall.data.model.ProfileWall.Comments.Fields
+import com.example.vkwall.data.model.ProfileWall.Wall.FieldsWall
+import com.example.vkwall.data.model.Recommended.FieldsRecommended
+import com.example.vkwall.data.model.Search.FieldsSearch
 
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface VkApi {
+
+    @FormUrlEncoded
+    @POST("wall.delete")
+    fun deleteWall(
+            @Field("owner_id") owner_id: Int,
+            @Field("post_id") post_id: Int,
+            @Field("access_token") access_token: String,
+            @Field("v") v: String
+    ): Call<FieldsDeleteWall>
+
+    /**
+     * @param access_token
+     * @param v
+     */
+    @GET("newsfeed.getRecommended")
+    fun newsfeedGetRecommended(
+            @Query("access_token") access_token: String,
+            @Query("v") v: String
+    ): Call<FieldsRecommended>
+
+
+    /**
+     * @param q
+     * @param fields
+     * @param access_token
+     * @param v
+     */
+    @GET("search.getHints")
+    fun setSearch(
+            @Query("q") search: String,
+            @Query("fields") fields: String,
+            @Query("limit") limit: Int,
+            @Query("access_token") access_token: String,
+            @Query("v") v: String
+    ): Call<FieldsSearch>
+
+    /**
+     * @param text
+     * @param access_token
+     * @param v
+     */
+    @FormUrlEncoded
+    @POST("status.set")
+    fun setStatus(
+            @Field("text") text: String,
+            @Field("access_token") access_token: String,
+            @Field("v") v: String
+    ): Call<FieldsSetStatus>
+
+
+    /**
+     * @param owner_id
+     * @param posts_id
+     * @param access_token
+     * @param v
+     */
+    @FormUrlEncoded
+    @POST("fave.addPost")
+    fun faveAddPost(
+            @Field("owner_id") owner_id: Int,
+            @Field("id") posts_id: Int,
+            @Field("access_token") access_token: String,
+            @Field("v") v: String
+    ): Call<FieldsAdd>
+
+
+    /**
+     * @param access_token
+     * @param v
+     */
+    @GET("status.get")
+    fun getStatus(
+            @Query("access_token") access_token: String,
+            @Query("v") v: String
+    ): Call<FieldsGetStatus>
 
     /**
      * GET запрос - список моих друзей
@@ -243,13 +321,26 @@ interface VkApi {
      * @param v
      * @return
      */
-    @GET("photos.get")
+    @GET("photos.getAll")
     fun getPhotos(
             @Query("access_token") access_token: String,
-            @Query("album_id") album_id: String,
-            @Query("rev") rev: Int,
             @Query("v") v: String
     ): Call<FieldsPhotos>
+
+
+    /**
+     * @param access_token
+     * @param album_id
+     * @param v
+     * @return
+     */
+    @GET("photos.get")
+    fun getPhotosSaved(
+            @Query("access_token") access_token: String,
+            @Query("album_id") album_id: String,
+            @Query("v") v: String
+    ): Call<FieldsPhotos>
+
 
     /**
      * @param access_token
@@ -306,8 +397,8 @@ interface VkApi {
     @POST("likes.add")
     fun getApiLikeFriends(
             @Field("type") type: String,
-            @Field("owner_id") owner_id: String,
-            @Field("item_id") item_id: String,
+            @Field("owner_id") owner_id: Int,
+            @Field("item_id") item_id: Int,
             @Field("access_token") access_token: String,
             @Field("v") v: String
     ): Call<FieldsLike>
@@ -327,8 +418,8 @@ interface VkApi {
     @POST("likes.delete")
     fun deleteLike(
             @Field("type") type: String,
-            @Field("owner_id") owner_id: String,
-            @Field("item_id") item_id: String,
+            @Field("owner_id") owner_id: Int,
+            @Field("item_id") item_id: Int,
             @Field("access_token") access_token: String,
             @Field("v") v: String
     ): Call<FieldsLike>
@@ -361,14 +452,14 @@ interface VkApi {
      * @return
      */
     @GET("wall.getComments")
-    fun getApiCommentsWall(
+    fun getCommentsWall(
             @Query("owner_id") owner_id: String,
             @Query("post_id") post_id: String,
             @Query("extended") extended: Int,
             @Query("count") count: Int,
             @Query("access_token") access_token: String,
             @Query("v") v: String
-    ): Call<RequestBody>
+    ): Call<Fields>
 
 }
 

@@ -31,10 +31,10 @@ public class PhotosPresenter extends BasePresenter<PhotosContract.ViewPhotosProf
     }
 
     @Override
-    public void loadPhotosProfile(String access_token, String album_id,int rev, String v) {
+    public void loadPhotosProfile(String access_token, String v) {
         if (getView() != null) {
             getView().showProgressPhotos();
-            photosCall = dataManager.getPhotoProfile(access_token, album_id, rev, v);
+            photosCall = dataManager.getPhotoProfile(access_token, v);
             photosCall.enqueue(new Callback<FieldsPhotos>() {
                 @Override
                 public void onResponse(Call<FieldsPhotos> call, Response<FieldsPhotos> response) {
@@ -43,6 +43,33 @@ public class PhotosPresenter extends BasePresenter<PhotosContract.ViewPhotosProf
                         if (response.isSuccessful()) {
                             Log.e("SUCCESS_PHOTOS", call.request() + "");
                             getView().showPhotosProfile(response.body().getResponse().getItems());
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<FieldsPhotos> call, Throwable t) {
+                    if (getView() != null) {
+                        getView().hideProgressPhotos();
+                        getView().noInternetPhotos();
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void loadPhotoSaved(String access_token, String album_id, String v) {
+        if (getView() != null) {
+            getView().showProgressPhotos();
+            photosCall = dataManager.getPhotoSaved(access_token, album_id, v);
+            photosCall.enqueue(new Callback<FieldsPhotos>() {
+                @Override
+                public void onResponse(Call<FieldsPhotos> call, Response<FieldsPhotos> response) {
+                    if (getView() != null) {
+                        getView().hideProgressPhotos();
+                        if (response.isSuccessful()) {
+                            getView().showPhotoSaved(response.body().getResponse().getItems());
                         }
                     }
                 }

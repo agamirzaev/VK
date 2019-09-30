@@ -10,6 +10,8 @@ public interface PhotosContract {
     interface ViewPhotosProfile extends MvpView {
         void showPhotosProfile(List<ItemPhotos> itemPhotos);
 
+        void showPhotoSaved(List<ItemPhotos> itemPhotos);
+
         void showProgressPhotos();
 
         void hideProgressPhotos();
@@ -19,6 +21,8 @@ public interface PhotosContract {
 
 
     interface PresenterPhotos extends MvpPresenter<PhotosContract.ViewPhotosProfile> {
-        void loadPhotosProfile(String access_token, String album_id, int rev, String v);
+        void loadPhotosProfile(String access_token, String v);
+
+        void loadPhotoSaved(String access_token, String album_id, String v);
     }
 }

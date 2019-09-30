@@ -83,7 +83,7 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.ViewHolderVi
         viewHolderVideo.view_video.setText("Просмотры " + itemVideo.getViews().toString());
         viewHolderVideo.data_video.setText(getDate(timestamp + ""));
 
-        Picasso.with(viewHolderVideo.itemView.getContext())
+        Picasso.get()
                 .load(itemVideo.getImage().get(3).getUrl())
                 .into(viewHolderVideo.photo_video);
     }

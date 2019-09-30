@@ -8,51 +8,49 @@
     <application
         android:name=".ul.App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_vk"
+        android:icon="@drawable/ic_vk_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ul.main.NewsFeedActivity"></activity>
         <activity
-            android:name=".ul.main.FriendsActivity"
-            android:label="Друзья"
-            android:parentActivityName=".ul.main.MainActivity" />
+            android:name=".ul.main.activity.EditProfileActivity"
+            android:parentActivityName=".ul.main.activity.ProfileActivity" />
         <activity
-            android:name=".ul.main.VideoActivity"
-            android:label="Видео"
-            android:parentActivityName=".ul.main.MainActivity" />
+            android:name=".ul.main.activity.DetailsProfileActivity"
+            android:parentActivityName=".ul.main.activity.ProfileActivity" />
         <activity
-            android:name=".ul.main.ProfileActivity"
-            android:parentActivityName=".ul.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ul.main.activity.SearchActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
+        <activity android:name=".ul.main.activity.NewsFeedActivity" />
         <activity
-            android:name=".ul.main.DocsActivity"
-            android:label="Документы"
-            android:parentActivityName=".ul.main.MainActivity" />
+            android:name=".ul.main.activity.FriendsActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
         <activity
-            android:name=".ul.main.FaveActivity"
-            android:label="Закладки"
-            android:parentActivityName=".ul.main.MainActivity" />
+            android:name=".ul.main.activity.VideoActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
         <activity
-            android:name=".ul.main.PhotosActivity"
-            android:label="Фотографии"
-            android:parentActivityName=".ul.main.MainActivity" />
+            android:name=".ul.main.activity.ProfileActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
         <activity
-            android:name=".ul.main.GroupActivity"
-            android:label="Группы"
-            android:parentActivityName=".ul.main.MainActivity" />
+            android:name=".ul.main.activity.DocsActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
         <activity
-            android:name=".ul.main.WallActivity"
-            android:label="Запись на стене" />
+            android:name=".ul.main.activity.FaveActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
         <activity
-            android:name=".ul.main.FriendsInfoActivity"
-            android:parentActivityName=".ul.main.FriendsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ul.main.activity.PhotosActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
         <activity
-            android:name=".ul.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ul.main.activity.GroupActivity"
+            android:parentActivityName=".ul.main.activity.MainActivity" />
+        <activity android:name=".ul.main.activity.WallActivity" />
+        <activity
+            android:name=".ul.main.activity.FriendsInfoActivity"
+            android:parentActivityName=".ul.main.activity.FriendsActivity" />
+        <activity
+            android:name=".ul.main.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

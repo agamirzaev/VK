@@ -5,6 +5,7 @@ import android.app.Application
 import com.example.vkwall.data.DataManager
 import com.vk.api.sdk.VK
 
+
 class App : Application() {
 
     var dataManager: DataManager? = null
@@ -13,5 +14,6 @@ class App : Application() {
         super.onCreate()
         VK.initialize(this)
         dataManager = DataManager()
+
     }
 }

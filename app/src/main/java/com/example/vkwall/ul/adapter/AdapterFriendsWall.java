@@ -14,20 +14,19 @@ import android.widget.Toast;
 
 import com.example.vkwall.R;
 import com.example.vkwall.data.model.LikeWalls.ResponseLike;
-import com.example.vkwall.data.model.ProfileWall.GroupWall;
-import com.example.vkwall.data.model.ProfileWall.ItemWall;
-import com.example.vkwall.data.model.ProfileWall.ProfileWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.GroupWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.ItemWall;
+import com.example.vkwall.data.model.ProfileWall.Wall.ProfileWall;
 import com.example.vkwall.mvp.likepost.LikeContract;
 import com.example.vkwall.mvp.likepost.LikePresenter;
 import com.example.vkwall.ul.App;
-import com.example.vkwall.ul.main.WallActivity;
+import com.example.vkwall.ul.main.activity.WallActivity;
 import com.example.vkwall.util.SharedPreference;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.HolderWall>
-        implements LikeContract.ViewLikePost {
+public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.HolderWall> {
 
     public static String POSTS = "POSTS";
     public static String POST_ID = "POST_ID";
@@ -38,8 +37,9 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
     private List<ItemWall> itemWalls;
     private List<ProfileWall> profileWalls;
     private List<GroupWall> groupWalls;
-
     private LikePresenter presenter;
+    private int owner_id;
+    private int item_id;
 
 
     public AdapterFriendsWall(List<ItemWall> itemWalls, List<ProfileWall> profileWalls, List<GroupWall> groupWalls) {
@@ -70,21 +70,7 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
         return itemWalls.size();
     }
 
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void showLike(ResponseLike responseLike) {
-    }
-
-    @Override
-    public void deleteLike(ResponseLike responseLike) {
-
-    }
-
-
-    class HolderWall extends RecyclerView.ViewHolder {
-        private TextView text_max_wall;
-
+    class HolderWall extends RecyclerView.ViewHolder implements LikeContract.ViewLikePost {
         private TextView last_name;
         private TextView first_name;
         private ImageView photo_profile;
@@ -95,7 +81,6 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
 
         private ImageView photo_wall;
         private TextView text_wall;
-
         private ImageView like_wall;
 
         private TextView view_wall_count;
@@ -105,7 +90,6 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
 
         HolderWall(@NonNull final View itemView) {
             super(itemView);
-            text_max_wall = itemView.findViewById(R.id.text_max_wall);
 
             last_name = itemView.findViewById(R.id.last_name);
             first_name = itemView.findViewById(R.id.first_name);
@@ -126,7 +110,7 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
 
 
             presenter = new LikePresenter(((App) itemView.getContext().getApplicationContext()).getDataManager());
-            presenter.attachView(AdapterFriendsWall.this);
+            presenter.attachView(this);
 
             comment_wall.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,38 +124,41 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
                 }
             });
         }
+
+        @Override
+        public void showLike(ResponseLike responseLike) {
+
+        }
+
+        @Override
+        public void deleteLike(ResponseLike responseLike) {
+
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private void setData(final HolderWall holderWall, ItemWall itemWall) {
 
-        final String owner_id = itemWall.getOwnerId().toString();
-        final String item_id = itemWall.getId().toString();
+        owner_id = itemWall.getOwnerId();
+        item_id = itemWall.getId();
 
         for (ProfileWall profile : profileWalls) {
             if (profile.getId().equals(itemWall.getOwnerId())) {
-                if (itemWall.getText() != "") {
-                    holderWall.text_max_wall.setVisibility(View.VISIBLE);
-                }
                 holderWall.last_name.setText(profile.getLastName());
                 holderWall.first_name.setText(profile.getFirstName());
-                Picasso.with(holderWall.itemView.getContext())
+                Picasso.get()
                         .load(profile.getPhotoMaxOrig())
                         .into(holderWall.photo_profile);
             }
         }
-
 
         for (GroupWall groupWall : groupWalls) {
             holderWall.groups.setVisibility(View.VISIBLE);
             String owners_id = "-" + groupWall.getId();
             if (itemWall.getCopyHistory() != null) {
                 if (owners_id.equals(itemWall.getCopyHistory().get(0).getOwnerId().toString())) {
-                    if (itemWall.getCopyHistory().get(0).getText() != "") {
-                        holderWall.text_max_wall.setVisibility(View.VISIBLE);
-                    }
                     holderWall.name_groups.setText(groupWall.getName());
-                    Picasso.with(holderWall.itemView.getContext())
+                    Picasso.get()
                             .load(groupWall.getPhoto50())
                             .into(holderWall.photo_groups);
                 }
@@ -190,28 +177,22 @@ public class AdapterFriendsWall extends RecyclerView.Adapter<AdapterFriendsWall.
             if (itemWall.getAttachments().get(0).getPhoto().getText() != "") {
                 holderWall.text_wall.setText(itemWall.getText());
             }
-            Picasso.with(holderWall.itemView.getContext())
+            Picasso.get()
                     .load(itemWall.getAttachments().get(0).getPhoto().getSizes().get(4).getUrl())
                     .into(holderWall.photo_wall);
         }
 
-
         if (itemWall.getCopyHistory() != null) {
             holderWall.text_wall.setText(itemWall.getCopyHistory().get(0).getText());
-            Picasso.with(holderWall.itemView.getContext()).
-                    load(itemWall.getCopyHistory().get(0).getAttachments().get(0).getPhoto().getSizes().get(4).getUrl())
+            Picasso.get()
+                    .load(itemWall.getCopyHistory().get(0).getAttachments().get(0).getPhoto().getSizes().get(4).getUrl())
                     .into(holderWall.photo_wall);
         }
 
+        getLike(itemWall);
+    }
 
-        holderWall.text_max_wall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holderWall.text_wall.setMaxLines(Integer.MAX_VALUE);
-                holderWall.text_max_wall.setVisibility(View.GONE);
-            }
-        });
-
+    private void getLike(ItemWall itemWall) {
         if (itemWall.getLikes().getUserLikes() == 1) {
             holderWall.like_wall.setImageResource(R.drawable.ic_like_true);
         } else {

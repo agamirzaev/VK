@@ -7,8 +7,9 @@ import java.util.List;
 public class Personal {
     @SerializedName("langs")
     private List<String> langs;
+    @SerializedName("religion")
+    private String religion;
     @SerializedName("inspired_by")
-
     private String inspiredBy;
     @SerializedName("people_main")
     private Integer peopleMain;
@@ -75,5 +76,13 @@ public class Personal {
 
     public void setReligionId(Integer religionId) {
         this.religionId = religionId;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
     }
 }

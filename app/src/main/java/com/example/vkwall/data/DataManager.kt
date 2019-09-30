@@ -1,6 +1,8 @@
 package com.example.vkwall.data
 
+import com.example.vkwall.data.model.AddFave.FieldsAdd
 import com.example.vkwall.data.model.DeleteFave.ResponseDeleteFave
+import com.example.vkwall.data.model.DeleteWall.FieldsDeleteWall
 import com.example.vkwall.data.model.FollowersList.FieldsFollowers
 import com.example.vkwall.data.model.FriendsList.FieldsFriends
 import com.example.vkwall.data.model.FriendsInfo.FieldsFriendsInfo
@@ -14,8 +16,13 @@ import com.example.vkwall.data.model.Profile.FaveProfile.FieldsFave
 import com.example.vkwall.data.model.Profile.GroupProfile.FieldsGroup
 import com.example.vkwall.data.model.Profile.PhotosProfile.FieldsPhotos
 import com.example.vkwall.data.model.Profile.ProfileInfo.FieldsProfile
+import com.example.vkwall.data.model.Profile.ProfileStatus.FieldsGetStatus
+import com.example.vkwall.data.model.Profile.ProfileStatus.FieldsSetStatus
 import com.example.vkwall.data.model.Profile.VideoProfile.FieldsVideo
-import com.example.vkwall.data.model.ProfileWall.FieldsWall
+import com.example.vkwall.data.model.ProfileWall.Comments.Fields
+import com.example.vkwall.data.model.ProfileWall.Wall.FieldsWall
+import com.example.vkwall.data.model.Recommended.FieldsRecommended
+import com.example.vkwall.data.model.Search.FieldsSearch
 import com.example.vkwall.data.remote.ServicesGenerator
 import com.example.vkwall.data.remote.VkApi
 
@@ -25,6 +32,68 @@ import retrofit2.Call
 class DataManager {
 
     private val vkApi = ServicesGenerator.createService(VkApi::class.java)
+
+
+    /**
+     * @param owner_id
+     * @param post_id
+     * @param access_token
+     * @param v
+     */
+    fun deleteWall(owner_id: Int, post_id: Int, access_token: String, v: String): Call<FieldsDeleteWall> {
+        return vkApi.deleteWall(owner_id, post_id, access_token, v)
+    }
+
+    /**
+     * @param access_token
+     * @param v
+     */
+    fun getRecommended(access_token: String, v: String): Call<FieldsRecommended> {
+        return vkApi.newsfeedGetRecommended(access_token, v)
+    }
+
+    /**
+     * @param q
+     * @param fields
+     * @param access_token
+     * @param v
+     */
+    fun setSearch(q: String, fields: String, limit: Int, access_token: String, v: String): Call<FieldsSearch> {
+        return vkApi.setSearch(q, fields, limit, access_token, v)
+    }
+
+    /**
+     * @param owner_id
+     * @param post_id
+     * @param extended
+     * @param count
+     * @param access_token
+     * @param v
+     */
+    fun getCommentsWall(owner_id: String, post_id: String, extended: Int, count: Int, access_token: String, v: String): Call<Fields> {
+        return vkApi.getCommentsWall(owner_id, post_id, extended, count, access_token, v)
+    }
+
+    fun setAddFavePost(owner_id: Int, post_id: Int, access_token: String, v: String): Call<FieldsAdd> {
+        return vkApi.faveAddPost(owner_id, post_id, access_token, v)
+    }
+
+    /**
+     * @param access_token
+     * @param v
+     */
+    fun getStatusProfile(access_token: String, v: String): Call<FieldsGetStatus> {
+        return vkApi.getStatus(access_token, v)
+    }
+
+    /**
+     * @param text
+     * @param access_token
+     * @param v
+     */
+    fun setStatusProfile(text: String, access_token: String, v: String): Call<FieldsSetStatus> {
+        return vkApi.setStatus(text, access_token, v)
+    }
 
     /**
      * @param user_id
@@ -165,7 +234,7 @@ class DataManager {
      * @param v
      * @return
      */
-    fun getLike(type: String, owner_id: String, item_id: String, access_token: String, v: String): Call<FieldsLike> {
+    fun getLike(type: String, owner_id: Int, item_id: Int, access_token: String, v: String): Call<FieldsLike> {
         return vkApi.getApiLikeFriends(type, owner_id, item_id, access_token, v)
     }
 
@@ -177,7 +246,7 @@ class DataManager {
      * @param v
      * @return
      */
-    fun deleteLike(type: String, owner_id: String, item_id: String, access_token: String, v: String): Call<FieldsLike> {
+    fun deleteLike(type: String, owner_id: Int, item_id: Int, access_token: String, v: String): Call<FieldsLike> {
         return vkApi.deleteLike(type, owner_id, item_id, access_token, v)
     }
 
@@ -238,8 +307,12 @@ class DataManager {
      * @param v
      * @return
      */
-    fun getPhotoProfile(access_token: String, album_id: String, rev: Int, v: String): Call<FieldsPhotos> {
-        return vkApi.getPhotos(access_token, album_id, rev, v)
+    fun getPhotoProfile(access_token: String, v: String): Call<FieldsPhotos> {
+        return vkApi.getPhotos(access_token, v)
+    }
+
+    fun getPhotoSaved(access_token: String, album_id: String, v: String): Call<FieldsPhotos> {
+        return vkApi.getPhotosSaved(access_token, album_id, v)
     }
 
 

@@ -29,7 +29,7 @@ public class LikePresenter extends BasePresenter<LikeContract.ViewLikePost> impl
     }
 
     @Override
-    public void likePostWall(String type, String owner_id, String item_id, String access_token, String v) {
+    public void likePostWall(String type, int owner_id, int item_id, String access_token, String v) {
         if (getView() != null) {
             likeCall = dataManager.getLike(type, owner_id, item_id, access_token, v);
             likeCall.enqueue(new Callback<FieldsLike>() {
@@ -53,7 +53,7 @@ public class LikePresenter extends BasePresenter<LikeContract.ViewLikePost> impl
     }
 
     @Override
-    public void deleteLike(String type, String owner_id, String item_id, String access_token, String v) {
+    public void deleteLike(String type, int owner_id, int item_id, String access_token, String v) {
         if (getView() != null) {
             likeCall = dataManager.deleteLike(type, owner_id, item_id, access_token, v);
             likeCall.enqueue(new Callback<FieldsLike>() {

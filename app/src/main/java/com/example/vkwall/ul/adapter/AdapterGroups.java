@@ -37,7 +37,9 @@ public class AdapterGroups extends RecyclerView.Adapter<AdapterGroups.ViewHolder
     public void onBindViewHolder(@NonNull AdapterGroups.ViewHolderGroups viewHolder, int i) {
         ItemGroup itemGroup = itemGroups.get(i);
         viewHolder.name_groups.setText(itemGroup.getName());
-        Picasso.with(viewHolder.itemView.getContext()).load(itemGroup.getPhoto100()).into(viewHolder.photo_groups);
+        Picasso.get()
+                .load(itemGroup.getPhoto100())
+                .into(viewHolder.photo_groups);
     }
 
     @Override
